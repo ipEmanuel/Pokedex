@@ -121,6 +121,31 @@ namespace negocio
                 datos.cerrrarConexion();
             }
         }
+        public void agregarConSP(Pokemon nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearProcedimiento("storedAltaPokemon");
+                datos.setearParametros("@numero", nuevo.Numero);
+                datos.setearParametros("@nombre", nuevo.Nombre);
+                datos.setearParametros("@desc", nuevo.Descripcion);
+                datos.setearParametros("@img", nuevo.UrlImagen);
+                datos.setearParametros("@idTipo", nuevo.Tipo.Id);
+                datos.setearParametros("@idDebilidad", nuevo.Debilidad.Id);
+                //datos.setearParametros("@idEvolucion", null);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrrarConexion();
+            }
+        }
         public void modificar(Pokemon poke)
         {
             AccesoDatos datos = new AccesoDatos();
