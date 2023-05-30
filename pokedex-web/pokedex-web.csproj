@@ -67,16 +67,41 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="PokemonsLista.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Master.Master.cs">
+      <DependentUpon>Master.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master.Master.designer.cs">
+      <DependentUpon>Master.Master</DependentUpon>
+    </Compile>
+    <Compile Include="PokemonsLista.aspx.cs">
+      <DependentUpon>PokemonsLista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PokemonsLista.aspx.designer.cs">
+      <DependentUpon>PokemonsLista.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Master.Master" />
+    <Content Include="libman.json" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -90,12 +115,12 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\domino\dominio.csproj">
-      <Project>{df21cbfe-a3c0-4110-870d-570c76dbac31}</Project>
+    <ProjectReference Include="..\dominio\dominio.csproj">
+      <Project>{85bf0d60-c57a-4070-ac70-e3f112cd733f}</Project>
       <Name>dominio</Name>
     </ProjectReference>
     <ProjectReference Include="..\negocio\negocio.csproj">
-      <Project>{b0592ba0-07e3-4dd2-a536-b50a89d87faf}</Project>
+      <Project>{f53c7163-d925-4f1c-9f16-a61a5ab9f98b}</Project>
       <Name>negocio</Name>
     </ProjectReference>
   </ItemGroup>
