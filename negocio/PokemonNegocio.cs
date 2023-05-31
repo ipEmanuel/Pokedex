@@ -10,7 +10,7 @@ namespace negocio
 {
     public class PokemonNegocio
     {
-        public List<Pokemon> listar ()
+        public List<Pokemon> listar (string id = "")
         { 
             List<Pokemon> lista = new List<Pokemon>();
             SqlConnection conexion = new SqlConnection();
@@ -21,7 +21,10 @@ namespace negocio
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id From POKEMONS P, ELEMENTOS E, ELEMENTOS D Where E.Id = P.IdTipo And D.Id = P.IdDebilidad and P.Activo = 1";
+                comando.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id From POKEMONS P, ELEMENTOS E, ELEMENTOS D Where E.Id = P.IdTipo And D.Id = P.IdDebilidad and P.Activo = 1 ";
+                if (id != "")
+                    comando.CommandText += " and P.Id = " + id;
+
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -171,6 +174,32 @@ namespace negocio
                 datos.cerrrarConexion();
             }
         }
+        public void modificarConSP(Pokemon poke)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {              
+                datos.setearProcedimiento("storedModificarPokemon");             
+                
+                datos.setearParametros("@numero", poke.Numero);
+                datos.setearParametros("@nombre", poke.Nombre);
+                datos.setearParametros("@desc", poke.Descripcion);
+                datos.setearParametros("@img", poke.UrlImagen);
+                datos.setearParametros("@idTipo", poke.Tipo.Id);
+                datos.setearParametros("@idDebilidad", poke.Debilidad.Id);
+                datos.setearParametros("@id", poke.Id);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrrarConexion();
+            }
+        }
         public void eliminar(int id)
         {
             try
@@ -289,5 +318,6 @@ namespace negocio
                 throw ex;
             }
         }
+                
     }
 }
