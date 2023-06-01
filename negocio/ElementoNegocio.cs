@@ -12,10 +12,10 @@ namespace negocio
         public List<Elemento> listar()
         {
             List<Elemento> lista = new List<Elemento>();
-            AccesoDatos datos = new AccesoDatos();  
+            AccesoDatos datos = new AccesoDatos();
 
             try
-			{
+            {
                 datos.setearConsulta("Select Id, Descripcion From ELEMENTOS");
                 datos.ejecutarLectura();
 
@@ -29,11 +29,11 @@ namespace negocio
                 }
 
                 return lista;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             finally
             {
                 datos.cerrrarConexion();

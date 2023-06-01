@@ -10,8 +10,8 @@ namespace negocio
 {
     public class PokemonNegocio
     {
-        public List<Pokemon> listar (string id = "")
-        { 
+        public List<Pokemon> listar(string id = "")
+        {
             List<Pokemon> lista = new List<Pokemon>();
             SqlConnection conexion = new SqlConnection();
             SqlCommand comando = new SqlCommand();
@@ -21,7 +21,7 @@ namespace negocio
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id From POKEMONS P, ELEMENTOS E, ELEMENTOS D Where E.Id = P.IdTipo And D.Id = P.IdDebilidad and P.Activo = 1 ";
+                comando.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id, P.Activo From POKEMONS P, ELEMENTOS E, ELEMENTOS D Where E.Id = P.IdTipo And D.Id = P.IdDebilidad ";
                 if (id != "")
                     comando.CommandText += " and P.Id = " + id;
 
@@ -40,7 +40,7 @@ namespace negocio
 
                     //if (!(lector.IsDBNull(lector.GetOrdinal("UrlImagen"))))
                     //    aux.UrlImagen = (string)lector["UrlImagen"];
-                    if(!(lector["UrlImagen"] is DBNull))
+                    if (!(lector["UrlImagen"] is DBNull))
                         aux.UrlImagen = (string)lector["UrlImagen"];
 
                     aux.Tipo = new Elemento();
@@ -49,25 +49,25 @@ namespace negocio
                     aux.Debilidad = new Elemento();
                     aux.Debilidad.Id = (int)lector["IdDebilidad"];
                     aux.Debilidad.Descripcion = (string)lector["Debilidad"];
-
+                    aux.Activo = bool.Parse(lector["Activo"].ToString());
                     lista.Add(aux);
                 }
 
                 conexion.Close();
                 return lista;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
-        } 
+        }
         public List<Pokemon> listarConSP()
         {
 
             List<Pokemon> lista = new List<Pokemon>();
             AccesoDatos datos = new AccesoDatos();
             try
-            {                
+            {
                 datos.setearProcedimiento("storedListar");
                 datos.ejecutarLectura();
 
@@ -90,6 +90,7 @@ namespace negocio
                     aux.Debilidad = new Elemento();
                     aux.Debilidad.Id = (int)datos.Lector["IdDebilidad"];
                     aux.Debilidad.Descripcion = (string)datos.Lector["Debilidad"];
+                    aux.Activo = bool.Parse(datos.Lector["Activo"].ToString());
 
                     lista.Add(aux);
                 }
@@ -178,9 +179,9 @@ namespace negocio
         {
             AccesoDatos datos = new AccesoDatos();
             try
-            {              
-                datos.setearProcedimiento("storedModificarPokemon");             
-                
+            {
+                datos.setearProcedimiento("storedModificarPokemon");
+
                 datos.setearParametros("@numero", poke.Numero);
                 datos.setearParametros("@nombre", poke.Nombre);
                 datos.setearParametros("@desc", poke.Descripcion);
@@ -205,21 +206,6 @@ namespace negocio
             try
             {
                 AccesoDatos datos = new AccesoDatos();
-                datos.setearConsulta("update pokemons set Activo =0 where id = @id");
-                datos.setearParametros("@id",id);
-                datos.ejecutarAccion();
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-        public void eliminarLogico(int id)
-        {
-            try
-            {
-                AccesoDatos datos = new AccesoDatos();
                 datos.setearConsulta("delete from pokemons where id = @id");
                 datos.setearParametros("@id", id);
                 datos.ejecutarAccion();
@@ -228,6 +214,21 @@ namespace negocio
             catch (Exception ex)
             {
 
+            }
+        }
+        public void eliminarLogico(int id, bool activo = false)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setearConsulta("update pokemons set Activo = @activo where id = @id");
+                datos.setearParametros("@id", id);
+                datos.setearParametros("@activo", activo);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
         public List<Pokemon> filtrar(string campo, string criterio, string filtro)
@@ -318,6 +319,6 @@ namespace negocio
                 throw ex;
             }
         }
-                
+
     }
 }
