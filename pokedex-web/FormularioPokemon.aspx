@@ -20,7 +20,7 @@
             <div class="mb-3">
                 <label for="txtNumero" class="form-label">Número: </label>
                 <asp:TextBox runat="server" ID="txtNumero" CssClass="form-control" />
-            </div>
+            </div> 
             <div class="mb-3">
                 <label for="ddlTipo" class="form-label">Tipo: </label>
                 <asp:DropDownList ID="ddlTipo" CssClass="form-select" runat="server"></asp:DropDownList>

@@ -15,7 +15,7 @@ namespace pokedex_web
             dgvPokemons.DataSource = negocio.listarConSP();
             dgvPokemons.DataBind();
         }
-
+         
         protected void dgvPokemons_SelectedIndexChanged(object sender, EventArgs e)
         {
             string id = dgvPokemons.SelectedDataKey.Value.ToString();

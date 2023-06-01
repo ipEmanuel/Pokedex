@@ -8,7 +8,7 @@ using dominio;
 namespace negocio
 {
     public class ElementoNegocio
-    {
+    { 
         public List<Elemento> listar()
         {
             List<Elemento> lista = new List<Elemento>();

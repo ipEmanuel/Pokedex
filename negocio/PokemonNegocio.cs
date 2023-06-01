@@ -229,7 +229,7 @@ namespace negocio
             {
 
             }
-        }
+        } 
         public List<Pokemon> filtrar(string campo, string criterio, string filtro)
         {
             List<Pokemon> lista = new List<Pokemon>();

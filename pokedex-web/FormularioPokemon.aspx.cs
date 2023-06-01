@@ -122,4 +122,4 @@ namespace pokedex_web
             imgPokemon.ImageUrl = txtImagenUrl.Text;
         }
     }
-}
+} 

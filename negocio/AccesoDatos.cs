@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace negocio
-{
+{ 
     public class AccesoDatos
     {
         private SqlConnection conexion;
