@@ -15,7 +15,7 @@ namespace pokedex_web
         protected void Page_Load(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
-            ListaPokemon = negocio.listarConSP();
+            ListaPokemon = negocio.listarConSP(); 
 
             if (!IsPostBack)
             {

@@ -21,7 +21,7 @@
     </asp:GridView>
     <a href="FormularioPokemon.aspx" class="btn btn-primary">Agregar</a>
 
-
+     
 
 
 </asp:Content>

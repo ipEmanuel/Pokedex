@@ -145,4 +145,4 @@ namespace pokedex_web
             }
         }
     }
-}
+} 

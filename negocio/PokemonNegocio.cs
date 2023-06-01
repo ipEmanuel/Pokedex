@@ -215,6 +215,7 @@ namespace negocio
             {
 
             }
+<<<<<<< HEAD
         }
         public void eliminarLogico(int id, bool activo = false)
         {
@@ -231,6 +232,9 @@ namespace negocio
                 throw ex;
             }
         }
+=======
+        } 
+>>>>>>> 6ca4da9a76c4e8bc150670150d2f1f71c3478907
         public List<Pokemon> filtrar(string campo, string criterio, string filtro)
         {
             List<Pokemon> lista = new List<Pokemon>();

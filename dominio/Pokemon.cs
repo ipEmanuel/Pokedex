@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dominio
-{
+{ 
     public class Pokemon
     {
         public int Id { get; set; }
