@@ -52,7 +52,7 @@ namespace pokedex_web
         protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlCriterio.Items.Clear();
-            if (ddlCampo.SelectedItem.ToString() == "Numero")
+            if (ddlCampo.SelectedItem.ToString() == "Número")
             {
                 ddlCriterio.Items.Add("Igual a");
                 ddlCriterio.Items.Add("Mayor a");

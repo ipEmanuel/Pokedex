@@ -285,27 +285,19 @@ namespace negocio
                 }
 
                 if (estado == "Activo")
-                {
                     consulta += " and P.Activo = 1";
-                }
                 else if (estado == "Inactivo")
-                {
                     consulta += " and P.Activo = 0";
-                }
 
                 datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
-
                 while (datos.Lector.Read())
                 {
                     Pokemon aux = new Pokemon();
                     aux.Id = (int)datos.Lector["Id"];
-                    aux.Numero = (int)datos.Lector["Numero"];
+                    aux.Numero = datos.Lector.GetInt32(0);
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-
-                    //if (!(lector.IsDBNull(lector.GetOrdinal("UrlImagen"))))
-                    //    aux.UrlImagen = (string)lector["UrlImagen"];
                     if (!(datos.Lector["UrlImagen"] is DBNull))
                         aux.UrlImagen = (string)datos.Lector["UrlImagen"];
 
@@ -320,6 +312,7 @@ namespace negocio
 
                     lista.Add(aux);
                 }
+
                 return lista;
             }
             catch (Exception ex)
@@ -327,6 +320,13 @@ namespace negocio
                 throw ex;
             }
         }
+
+
+
+
+
+
+
 
     }
 }
